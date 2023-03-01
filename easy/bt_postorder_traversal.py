@@ -1,6 +1,5 @@
 '''
-
-Given the root of a binary tree, return the inorder traversal of its nodes' values.
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
 
 
 
@@ -8,7 +7,7 @@ Example 1:
 
 
 Input: root = [1,null,2,3]
-Output: [1,3,2]
+Output: [3,2,1]
 Example 2:
 
 Input: root = []
@@ -21,7 +20,7 @@ Output: [1]
 
 Constraints:
 
-The number of nodes in the tree is in the range [0, 100].
+The number of the nodes in the tree is in the range [0, 100].
 -100 <= Node.val <= 100
 
 
@@ -37,12 +36,11 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+
 class Solution:
-    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         if root is None:
             return []
         return (
-           self.inorderTraversal(root.left) + [root.val] + self.inorderTraversal(root.right)
+            self.postorderTraversal(root.left) + self.postorderTraversal(root.right) + [root.val]
         )
-
-# [1,null,2,3]
